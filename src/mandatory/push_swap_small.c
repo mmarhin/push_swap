@@ -12,6 +12,34 @@
 
 #include "../../inc/ft_push_swap.h"
 
+void	sort_3_triangle(t_stack *sa)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = *(int *)sa->header->content;
+	second = *(int *)sa->header->next->content;
+	third = *(int *)sa->header->next->next->content;
+	if (first < second && second > third && first > third)
+		command_controller(sa, 0, 7);
+	else if (first > second && second < third && first > third)
+		command_controller(sa, 0, 5);
+	else if (first > second && second > third)
+	{
+		command_controller(sa, 0, 5);
+		command_controller(sa, 0, 1);
+	}
+	else if (first < second && second > third && first < third)
+	{
+		command_controller(sa, 0, 7);
+		command_controller(sa, 0, 1);
+	}
+	else if (first > second && second < third && first < third)
+		command_controller(sa, 0, 1);
+	command_controller(sa, 0, 0);
+}
+
 void	sort_upto5(t_stack *sa, t_stack *sb, int size)
 {
 	int	pos;
@@ -35,5 +63,4 @@ void	sort_upto5(t_stack *sa, t_stack *sb, int size)
 	to_push = sb->len;
 	while (to_push--)
 		command_controller(sa, sb, 3);
-	rotate_to_top_a(sa, get_min_pos(sa));
 }

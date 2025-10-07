@@ -6,7 +6,7 @@
 #    By: mamarin- <mamarin-@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 13:04:15 by dukim             #+#    #+#              #
-#    Updated: 2025/10/07 12:14:54 by mamarin-         ###   ########.fr        #
+#    Updated: 2025/10/07 17:40:23 by mamarin-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,12 @@ LIBFT_SRCS = src/libft/ft_atoi.c src/libft/ft_split.c src/libft/ft_putchar_fd.c 
 			src/libft/ft_strlcpy.c
 
 # Mandatory sources
-SRCS = src/mandatory/main.c src/mandatory/optimize1.c src/mandatory/optimize2.c \
+SRCS = src/mandatory/main.c src/mandatory/optimize.c \
 		src/mandatory/push_swap.c src/mandatory/push_swap_chunks.c \
 		src/mandatory/push_swap_small.c src/mandatory/push_swap_normalize.c \
 		src/mandatory/push_swap_positions.c src/mandatory/push_swap_rotate.c \
 		src/mandatory/init_stack.c src/mandatory/free_handler.c \
-		src/mandatory/utils1.c  \
+		src/mandatory/utils.c  \
 		src/mandatory/stack_commands.c
 
 # All object files

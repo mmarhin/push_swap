@@ -61,7 +61,7 @@ static void	sort_int_array(int *arr, unsigned int len)
 	}
 }
 
-static void	assign_indices(t_stack *stack, int *sorted, int *values,
+static void	assign_indexs(t_stack *stack, int *sorted, int *values,
 		unsigned int len)
 {
 	unsigned int	i;
@@ -92,7 +92,7 @@ void	normalize_indices(t_stack *stack)
 		return ;
 	fill_arrays(stack->header, values, sorted);
 	sort_int_array(sorted, stack->len);
-	assign_indices(stack, sorted, values, stack->len);
+	assign_indexs(stack, sorted, values, stack->len);
 	free(values);
 	free(sorted);
 }

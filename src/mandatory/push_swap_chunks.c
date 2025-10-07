@@ -73,5 +73,4 @@ void	chunk_sort(t_stack *sa, t_stack *sb, int size)
 		rotate_to_top_b(sb, pos);
 		command_controller(sa, sb, 3);
 	}
-	rotate_to_top_a(sa, get_min_pos(sa));
 }
