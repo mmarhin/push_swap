@@ -24,8 +24,8 @@ static int	get_chunk_size(int size)
 	if (size <= 100)
 		return (size / 5 + (size % 5 != 0));
 	if (size <= 500)
-		return (16);
-	return (20);
+		return (27);
+	return (23);
 }
 
 static void	process_current(t_stack *sa, t_stack *sb, int *data)
