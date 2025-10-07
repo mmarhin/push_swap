@@ -6,80 +6,58 @@
 /*   By: mamarin- <mamarin-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 20:12:42 by dukim             #+#    #+#             */
-/*   Updated: 2025/10/05 12:49:54 by mamarin-         ###   ########.fr       */
+/*   Updated: 2025/10/07 12:22:38 by mamarin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/ft_push_swap.h"
 
-void	drop_triangle_bottom(t_stack *stack, unsigned int size)
+static void	run_command(t_stack *stack, int cmd_a, int cmd_b)
 {
-	unsigned int	len;
-
-	len = stack->len - size;
-	if (len <= (stack->len) / 2)
-	{
-		while (len--)
-		{
-			if (stack->name == 'A')
-				command_controller(stack, 0, 7);
-			else
-				command_controller(0, stack, 8);
-		}
-		return ;
-	}
-	while (size--)
-	{
-		if (stack->name == 'A')
-			command_controller(stack, 0, 5);
-		else
-			command_controller(0, stack, 6);
-	}
+	if (stack->name == 'A')
+		command_controller(stack, 0, cmd_a);
+	else
+		command_controller(0, stack, cmd_b);
 }
 
-void	sort_3_triangle(t_stack *stack, char is_max)
+static void	sort_three_base(t_stack *stack, int first, int second, int third)
 {
-	if (is_sorted(stack, 3, is_max))
-		return ;
-	if (stack->name == 'A')
-		command_controller(stack, 0, 5);
-	else
-		command_controller(0, stack, 6);
-	if (is_swap(stack, is_max) && stack->name == 'A')
-		command_controller(stack, 0, 1);
-	if (is_swap(stack, is_max) && stack->name == 'B')
-		command_controller(0, stack, 2);
-	if (stack->name == 'A')
-		command_controller(stack, 0, 7);
-	else
-		command_controller(0, stack, 8);
-	if (is_sorted(stack, 3, is_max))
-		return ;
-	if (is_swap(stack, is_max) && stack->name == 'A')
-		command_controller(stack, 0, 1);
-	if (is_swap(stack, is_max) && stack->name == 'B')
-		command_controller(0, stack, 2);
+	if (first > second && second < third && first < third)
+		run_command(stack, 1, 2);
+	else if (first > second && second > third)
+	{
+		run_command(stack, 1, 2);
+		run_command(stack, 7, 8);
+	}
+	else if (first > second && second < third && first > third)
+		run_command(stack, 5, 6);
+	else if (first < second && second > third && first < third)
+	{
+		run_command(stack, 1, 2);
+		run_command(stack, 5, 6);
+	}
+	else if (first < second && second > third && first > third)
+		run_command(stack, 7, 8);
 }
 
-int	earlyreturn_sorted_stack(t_stack *sa, t_stack *sb, unsigned int size,
-		t_is is)
+void	sort_3_triangle(t_stack *stack)
 {
-	int	i;
+	int	first;
+	int	second;
+	int	third;
 
-	if (is.is_a && is_sorted(sa, size, is.is_max))
+	if (!stack || stack->len < 2 || is_sorted(stack, 3))
+		return ;
+	if (stack->len == 2)
 	{
-		if (!is.is_3)
-			drop_triangle_bottom(sa, size);
-		return (1);
+		first = *(int *)stack->header->content;
+		second = *(int *)stack->header->next->content;
+		if (first > second)
+			run_command(stack, 1, 2);
+		return ;
 	}
-	if (!is.is_a && is_sorted(sa, size, is.is_max == 0))
-	{
-		i = size;
-		while (i--)
-			command_controller(sa, sb, 4);
-		if (!is.is_3)
-			drop_triangle_bottom(sb, size);
-		return (1);
-	}
-	return (0);
+	first = *(int *)stack->header->content;
+	second = *(int *)stack->header->next->content;
+	third = *(int *)stack->header->next->next->content;
+	sort_three_base(stack, first, second, third);
 }
